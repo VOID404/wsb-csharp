@@ -1,6 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
-using System.Numerics;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
@@ -10,18 +8,18 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        DataContext = new ObservableCollection<BigInteger> { 0, 1 };
+        DataContext = new Model();
         InitializeComponent();
     }
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        var data = DataContext as ObservableCollection<BigInteger>
-                   ?? throw new ApplicationException("Invalid DataContext");
+        var model = DataContext as Model
+                    ?? throw new ApplicationException("Invalid DataContext");
 
-        var skip = (int)(SkipSpinner.Value ?? 1);
-        Console.WriteLine($"Generating next {skip} Fibonacci numbers from {data[^2]} and {data[^1]}");
-        var next = Fibonacci.Nth(skip, data[^1], data[^2]);
-        data.Add(next);
+        var skip = (int)(StepSpinner.Value ?? 1);
+        Console.WriteLine($"Generating next {skip} Fibonacci numbers from {model.Numbers[^2]} and {model.Numbers[^1]}");
+        var next = Fibonacci.Nth(skip, model.Numbers[^1], model.Numbers[^2]);
+        model.Numbers.Add(next);
     }
 }

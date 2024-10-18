@@ -2,13 +2,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fib="using:Fibonacci"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
         x:Class="Fibonacci.MainWindow"
-        Title="Fibonacci">
+        Title="Fibonacci"
+        x:DataType="fib:Model">
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-        <ScrollViewer MaxHeight="500">
-            <ItemsControl ItemsSource="{Binding}">
+        <ScrollViewer Height="500" Width="500">
+            <ItemsControl ItemsSource="{Binding Numbers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="500" Orientation="Horizontal" />
@@ -33,9 +35,9 @@
             <TextBlock Grid.Row="0"
                        Grid.Column="0"
                        VerticalAlignment="Center">
-                Skip:
+                Step:
             </TextBlock>
-            <NumericUpDown Name="SkipSpinner"
+            <NumericUpDown Name="StepSpinner"
                            Grid.Row="0" Grid.Column="1"
                            Value="1"
                            Minimum="0"
